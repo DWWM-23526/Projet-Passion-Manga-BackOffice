@@ -1,11 +1,8 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { useLogin, useNotify } from 'react-admin';
 
-interface MyLoginPageProps {
-    theme?: any;
-}
 
-const MyLoginPage: React.FC<MyLoginPageProps> = () => {
+const MyLoginPage = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const login = useLogin();
