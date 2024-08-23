@@ -26,14 +26,14 @@ export const App = () => (
             edit={EditGuesser}
             show={ShowGuesser}
           />
-         )}
-        {(permissions >= 2) && (
+        )}
+        {permissions >= 2 && (
           <>
             <Resource
               name="manga"
               list={MangasList}
               edit={EditGuesser}
-      create={MangaCreate}
+              create={MangaCreate}
               show={ShowGuesser}
             />
             <Resource
@@ -55,7 +55,7 @@ export const App = () => (
               show={ShowGuesser}
             />
           </>
-         )}
+        )}
       </>
     )}
   </Admin>
