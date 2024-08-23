@@ -8,6 +8,7 @@ import { UsersList } from "./components/lists/UsersList";
 import { EmailConfirmList } from "./components/lists/EmailConfirmList";
 import authProvider from "./provider/authProvider";
 import MyLoginPage from "./components/login/MyLoginPage";
+import { MangaCreate } from "./components/create/MangaCreate";
 
 export const App = () => (
   <Admin
@@ -25,13 +26,14 @@ export const App = () => (
             edit={EditGuesser}
             show={ShowGuesser}
           />
-         )}
-        {(permissions >= 2) && (
+        )}
+        {permissions >= 2 && (
           <>
             <Resource
               name="manga"
               list={MangasList}
               edit={EditGuesser}
+              create={MangaCreate}
               show={ShowGuesser}
             />
             <Resource
@@ -53,7 +55,7 @@ export const App = () => (
               show={ShowGuesser}
             />
           </>
-         )}
+        )}
       </>
     )}
   </Admin>
