@@ -1,18 +1,38 @@
-import { Datagrid, List, TextField } from "react-admin";
+import {
+  ChipField,
+  Datagrid,
+  FunctionField,
+  List,
+  ReferenceField,
+  ReferenceManyField,
+  SingleFieldList,
+  TextField,
+} from "react-admin";
 
 export const MangasList = () => (
   <List>
     <Datagrid>
-      <TextField source="id"/>
-      <TextField source="img_manga"/>
-      <TextField source="manga_name"/>
-      <TextField source="edition"/>
-      <TextField source="total_tome_number"/>
-      <TextField source="year_release"/>
-      <TextField source="tome_number"/>
-      <TextField source="texte"/>
-      <TextField source="is_deleted"/>
-      <TextField source="Id_mangaka"/>
+      <TextField label="ID" source="id" />
+      <TextField label="Titre" source="manga_name" />
+      <TextField label="Image" source="img_manga" />
+      <ReferenceManyField label="Genres" reference="manga" target="tags">
+        <SingleFieldList>
+          <ChipField source="tag_name" />
+        </SingleFieldList>
+      </ReferenceManyField>
+      <TextField label="Edition" source="edition" />
+      <TextField label="Numero de Tome" source="tome_number" />
+      <TextField label="Tome Total" source="total_tome_number" />
+      <TextField label="Année de Parution" source="year_release" />
+     
+      <TextField source="texte" />
+      <ReferenceField label="Auteur" source="Id_mangaka" reference="mangaka">
+        <FunctionField
+          source="first_name"
+          render={(name) => `${name.first_name} ${name.last_name}`}
+        />
+      </ReferenceField>
+      <TextField label="Suprimé" source="is_deleted" />
     </Datagrid>
   </List>
 );

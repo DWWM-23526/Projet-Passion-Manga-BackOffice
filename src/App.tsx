@@ -1,4 +1,4 @@
-import { Admin, Resource, EditGuesser, ShowGuesser } from "react-admin";
+import { Admin, Resource, EditGuesser, ShowGuesser, CreateView, Create } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./provider/dataProvider";
 import { MangasList } from "./components/lists/MangasList";
@@ -20,6 +20,7 @@ export const App = () => (
       name="manga"
       list={MangasList}
       edit={EditGuesser}
+      // create={Create}
       show={ShowGuesser}
     />
     <Resource
