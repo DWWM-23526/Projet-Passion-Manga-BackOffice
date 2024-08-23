@@ -1,6 +1,10 @@
-import { Datagrid, List, TextField } from "react-admin";
+import { Datagrid, List, TextField, usePermissions } from "react-admin";
 
-export const UsersList = () => (
+export const UsersList = () => {
+  const {permissions} = usePermissions();
+  if (permissions !== 3) {
+    return <div>Access Denied</div>
+  }
   <List>
     <Datagrid>
       <TextField source="id"/>
@@ -11,4 +15,4 @@ export const UsersList = () => (
       <TextField source="id_role"/>
     </Datagrid>
   </List>
-);
+};
