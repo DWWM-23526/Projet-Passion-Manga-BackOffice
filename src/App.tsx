@@ -1,4 +1,4 @@
-import { Admin, Resource, EditGuesser, ShowGuesser, CreateView, Create } from "react-admin";
+import { Admin, Resource, EditGuesser, ShowGuesser } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./provider/dataProvider";
 import { MangasList } from "./components/lists/MangasList";
@@ -8,6 +8,7 @@ import { UsersList } from "./components/lists/UsersList";
 import { EmailConfirmList } from "./components/lists/EmailConfirmList";
 import authProvider from "./provider/authProvider";
 import MyLoginPage from "./components/login/MyLoginPage";
+import { MangaCreate } from "./components/create/MangaCreate";
 
 export const App = () => (
   <Admin
@@ -20,7 +21,7 @@ export const App = () => (
       name="manga"
       list={MangasList}
       edit={EditGuesser}
-      // create={Create}
+      create={MangaCreate}
       show={ShowGuesser}
     />
     <Resource

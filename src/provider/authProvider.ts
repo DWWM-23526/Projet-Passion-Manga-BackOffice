@@ -32,9 +32,17 @@ export const authProvider: AuthProvider = {
 
   checkAuth: () =>
     localStorage.getItem("authToken") ? Promise.resolve() : Promise.reject(),
-  getPermissions: () => {
-    //TODO: Gerez ici les permissions redacteurs/admins
-    return Promise.resolve();
+  getPermissions: async () => {
+    const token = localStorage.getItem("authToken");
+    const user = { token: `Bearer ${token}`, authenticated: !!token };
+    const options = { method: "POST" };
+
+    const responseForIdRole = await fetchUtils.fetchJson(`${baseUrl}/permission`, {
+      ...options,
+      user,
+    });
+    const data = responseForIdRole.json.data;
+    return data;
   },
 
   getIdentity: () => {
@@ -46,3 +54,5 @@ export const authProvider: AuthProvider = {
 };
 
 export default authProvider;
+
+
