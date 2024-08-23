@@ -7,7 +7,6 @@ const token = localStorage.getItem("authToken");
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
     const response = await fetchUtils.fetchJson(`${API_URL}/${resource}`);
-    console.log(token);
     return {
       data: response.json.data,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
@@ -32,7 +31,7 @@ const dataProvider: DataProvider = {
             body: JSON.stringify(data),
             headers: new Headers({
               'Content-Type': 'application/json',
-              'authorization': `Bearer ${token}`, 
+              'authorization': `Bearer ${token}`,
           }),
         }
     );
