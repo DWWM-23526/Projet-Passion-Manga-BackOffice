@@ -17,36 +17,46 @@ export const App = () => (
     dataProvider={dataProvider}
     authProvider={authProvider}
   >
-    <Resource
-      name="manga"
-      list={MangasList}
-      edit={EditGuesser}
+    {(permissions) => (
+      <>
+        {permissions === 3 && (
+          <Resource
+            name="users"
+            list={UsersList}
+            edit={EditGuesser}
+            show={ShowGuesser}
+          />
+         )}
+        {(permissions >= 2) && (
+          <>
+            <Resource
+              name="manga"
+              list={MangasList}
+              edit={EditGuesser}
       create={MangaCreate}
-      show={ShowGuesser}
-    />
-    <Resource
-      name="mangaka"
-      list={MangakasList}
-      edit={EditGuesser}
-      show={ShowGuesser}
-    />
-    <Resource
-      name="tags"
-      list={TagsList}
-      edit={EditGuesser}
-      show={ShowGuesser}
-    />
-    <Resource
-      name="users"
-      list={UsersList}
-      edit={EditGuesser}
-      show={ShowGuesser}
-    />
-    <Resource
-      name="emailConfirm"
-      list={EmailConfirmList}
-      edit={EditGuesser}
-      show={ShowGuesser}
-    />
+              show={ShowGuesser}
+            />
+            <Resource
+              name="mangaka"
+              list={MangakasList}
+              edit={EditGuesser}
+              show={ShowGuesser}
+            />
+            <Resource
+              name="tags"
+              list={TagsList}
+              edit={EditGuesser}
+              show={ShowGuesser}
+            />
+            <Resource
+              name="emailConfirm"
+              list={EmailConfirmList}
+              edit={EditGuesser}
+              show={ShowGuesser}
+            />
+          </>
+         )}
+      </>
+    )}
   </Admin>
 );

@@ -34,15 +34,26 @@ export const authProvider: AuthProvider = {
     localStorage.getItem("authToken") ? Promise.resolve() : Promise.reject(),
   getPermissions: async () => {
     const token = localStorage.getItem("authToken");
-    const user = { token: `Bearer ${token}`, authenticated: !!token };
-    const options = { method: "POST" };
-
-    const responseForIdRole = await fetchUtils.fetchJson(`${baseUrl}/permission`, {
-      ...options,
-      user,
-    });
-    const data = responseForIdRole.json.data;
-    return data;
+  
+    if (!token) {
+      return Promise.reject();
+    }
+  
+    try {
+      const response = await fetchUtils.fetchJson(`${baseUrl}/permission`, {
+        method: "POST",
+        headers: new Headers({
+          'Authorization': `Bearer ${token}`,
+        }),
+      });
+  
+      const data = response.json.data.id_role;
+      
+      return Promise.resolve(data);
+    } catch (error) {
+      console.error('Error fetching permissions:', error);
+      return Promise.reject();
+    }
   },
 
   getIdentity: () => {
