@@ -3,10 +3,10 @@ import { Datagrid, List, TextField } from "react-admin";
 export const EmailConfirmList = () => (
   <List>
     <Datagrid>
-      <TextField source="id"/>
-      <TextField source="email"/>
-      <TextField source="name"/>
-      <TextField source="date"/>
+      <TextField label="ID" source="id" />
+      <TextField label="Email" source="email" />
+      <TextField label="Nom" source="name" />
+      <TextField label="Date" source="date" />
     </Datagrid>
   </List>
 );

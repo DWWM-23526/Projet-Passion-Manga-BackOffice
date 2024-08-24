@@ -24,7 +24,6 @@ export const MangasList = () => (
       <TextField label="Numero de Tome" source="tome_number" />
       <TextField label="Tome Total" source="total_tome_number" />
       <TextField label="Année de Parution" source="year_release" />
-     
       <TextField source="texte" />
       <ReferenceField label="Auteur" source="Id_mangaka" reference="mangaka">
         <FunctionField
@@ -32,7 +31,7 @@ export const MangasList = () => (
           render={(name) => `${name.first_name} ${name.last_name}`}
         />
       </ReferenceField>
-      <TextField label="Suprimé" source="is_deleted" />
+      <TextField label="Supprimé" source="is_deleted" />
     </Datagrid>
   </List>
 );
