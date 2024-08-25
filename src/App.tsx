@@ -9,6 +9,7 @@ import { EmailConfirmList } from "./components/lists/EmailConfirmList";
 import authProvider from "./provider/authProvider";
 import MyLoginPage from "./components/login/MyLoginPage";
 import { MangaCreate } from "./components/create/MangaCreate";
+import { MangakaCreate } from "./components/create/MangakaCreate";
 
 export const App = () => (
   <Admin
@@ -40,6 +41,7 @@ export const App = () => (
               name="mangaka"
               list={MangakasList}
               edit={EditGuesser}
+              create={MangakaCreate}
               show={ShowGuesser}
             />
             <Resource
