@@ -3,8 +3,22 @@ import { DataProvider, fetchUtils } from "react-admin";
 const API_URL = import.meta.env.VITE_SIMPLE_REST_URL;
 
 const dataProvider: DataProvider = {
-  getList: async (resource) => {
-    const response = await fetchUtils.fetchJson(`${API_URL}/${resource}`);
+  getList: async (resource, params) => {
+
+    if (!params.pagination) {
+      throw new Error("Pagination parameters are required");
+    }
+    if (!params.sort) {
+      throw new Error("Pagination parameters are required");
+    }
+
+    const { page, perPage } = params.pagination;
+    const { field, order } = params.sort;
+
+    const response = await fetchUtils.fetchJson(
+      `${API_URL}/${resource}?_page=${page}&_limit=${perPage}&_sort=${field}&_order=${order}`,
+    );
+    
     return {
       data: response.json.data,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
