@@ -1,4 +1,5 @@
 import {
+  BooleanField,
   ChipField,
   Datagrid,
   FunctionField,
@@ -12,7 +13,6 @@ import {
 export const MangasList = () => (
   <List>
     <Datagrid>
-      <TextField label="ID" source="id" />
       <TextField label="Titre" source="manga_name" />
       <TextField label="Image" source="img_manga" />
       <ReferenceManyField label="Genres" reference="manga" target="tags">
@@ -31,7 +31,7 @@ export const MangasList = () => (
           render={(name) => `${name.first_name} ${name.last_name}`}
         />
       </ReferenceField>
-      <TextField label="Supprimé" source="is_deleted" />
+      <BooleanField label="Supprimé" source="is_deleted" />
     </Datagrid>
   </List>
 );
