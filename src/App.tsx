@@ -5,11 +5,14 @@ import { MangasList } from "./components/lists/MangasList";
 import { MangakasList } from "./components/lists/MangakasList";
 import { TagsList } from "./components/lists/TagsList";
 import { UsersList } from "./components/lists/UsersList";
-import { EmailConfirmList } from "./components/lists/EmailConfirmList";
 import authProvider from "./provider/authProvider";
 import MyLoginPage from "./components/login/MyLoginPage";
 import { MangaCreate } from "./components/create/MangaCreate";
 import { MangakaCreate } from "./components/create/MangakaCreate";
+import { MangaEdit } from "./components/edit/MangaEdit";
+import { MangakaEdit } from "./components/edit/MangakaEdit";
+import { TagEdit } from "./components/edit/TagEdit";
+import { UserEdit } from "./components/edit/UserEdit";
 
 export const App = () => (
   <Admin
@@ -24,7 +27,7 @@ export const App = () => (
           <Resource
             name="users"
             list={UsersList}
-            edit={EditGuesser}
+            edit={UserEdit}
             show={ShowGuesser}
           />
         )}
@@ -33,27 +36,21 @@ export const App = () => (
             <Resource
               name="manga"
               list={MangasList}
-              edit={EditGuesser}
+              edit={MangaEdit}
               create={MangaCreate}
               show={ShowGuesser}
             />
             <Resource
               name="mangaka"
               list={MangakasList}
-              edit={EditGuesser}
+              edit={MangakaEdit}
               create={MangakaCreate}
               show={ShowGuesser}
             />
             <Resource
               name="tags"
               list={TagsList}
-              edit={EditGuesser}
-              show={ShowGuesser}
-            />
-            <Resource
-              name="emailConfirm"
-              list={EmailConfirmList}
-              edit={EditGuesser}
+              edit={TagEdit}
               show={ShowGuesser}
             />
           </>
