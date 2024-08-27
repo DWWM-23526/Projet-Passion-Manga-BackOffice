@@ -13,6 +13,10 @@ import { MangaEdit } from "./components/edit/MangaEdit";
 import { MangakaEdit } from "./components/edit/MangakaEdit";
 import { TagEdit } from "./components/edit/TagEdit";
 import { UserEdit } from "./components/edit/UserEdit";
+import { MangaShow } from "./components/show/MangaShow";
+import { MangakaShow } from "./components/show/MangakaShow";
+import { UserShow } from "./components/show/UserShow";
+import { TagShow } from "./components/show/TagShow";
 
 export const App = () => (
   <Admin
@@ -28,7 +32,7 @@ export const App = () => (
             name="users"
             list={UsersList}
             edit={UserEdit}
-            show={ShowGuesser}
+            show={UserShow}
           />
         )}
         {permissions >= 2 && (
@@ -38,20 +42,20 @@ export const App = () => (
               list={MangasList}
               edit={MangaEdit}
               create={MangaCreate}
-              show={ShowGuesser}
+              show={MangaShow}
             />
             <Resource
               name="mangaka"
               list={MangakasList}
               edit={MangakaEdit}
               create={MangakaCreate}
-              show={ShowGuesser}
+              show={MangakaShow}
             />
             <Resource
               name="tags"
               list={TagsList}
               edit={TagEdit}
-              show={ShowGuesser}
+              show={TagShow}
             />
           </>
         )}
