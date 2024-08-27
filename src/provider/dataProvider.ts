@@ -1,10 +1,10 @@
 import { DataProvider, fetchUtils } from "react-admin";
+import CreateRelationParams from "../interfaces/datProvider/CreateRelationParams";
 
 const API_URL = import.meta.env.VITE_SIMPLE_REST_URL;
 
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
-
     if (!params.pagination) {
       throw new Error("Pagination parameters are required");
     }
@@ -18,7 +18,7 @@ const dataProvider: DataProvider = {
     const response = await fetchUtils.fetchJson(
       `${API_URL}/${resource}?_page=${page}&_limit=${perPage}&_sort=${field}&_order=${order}`,
     );
-    
+
     return {
       data: response.json.data,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
@@ -65,9 +65,24 @@ const dataProvider: DataProvider = {
     const user = { token: `Bearer ${token}`, authenticated: !!token };
     const options = { method: "POST", body: JSON.stringify(data) };
 
+    const response = await fetchUtils.fetchJson(`${API_URL}/${resource}`, {
+      ...options,
+      user,
+    });
+
+    return { data: response.json.data };
+  },
+
+  createRelation: async (resource: string, params: CreateRelationParams) => {
+    const token = localStorage.getItem("authToken");
+    const user = { token: `Bearer ${token}`, authenticated: !!token };
+
     const response = await fetchUtils.fetchJson(
-      `${API_URL}/${resource}`,
-      {...options, user}
+      `${API_URL}/${resource}/${params.keyId}/${params.relationId}`,
+      {
+        method: "POST",
+        user,
+      },
     );
 
     return { data: response.json.data };
@@ -111,7 +126,7 @@ const dataProvider: DataProvider = {
 
     const response = await fetchUtils.fetchJson(
       `${API_URL}/${resource}/${params.id}`,
-      { ...options, user }
+      { ...options, user },
     );
 
     return {
@@ -127,15 +142,13 @@ const dataProvider: DataProvider = {
 
     const response = await fetchUtils.fetchJson(
       `${API_URL}/${resource}/${params.ids}`,
-      { ...options, user }
+      { ...options, user },
     );
 
     return {
       data: response.json.data,
     };
   },
-
-
 };
 
 export { dataProvider };
