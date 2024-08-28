@@ -1,25 +1,8 @@
 import { DataProvider, fetchUtils } from "react-admin";
 import CreateRelationParams from "../interfaces/datProvider/CreateRelationParams";
-import { decode } from "html-entities";
+import { decodeHtmlEntities } from "../utils/decodeHtmlEntities";
 
 const API_URL = import.meta.env.VITE_SIMPLE_REST_URL;
-
-const decodeHtmlEntities = (data: any): any => {
-  if (typeof data === 'string') {
-    return decode(data);
-  }
-  if (Array.isArray(data)) {
-    return data.map(decodeHtmlEntities);
-  }
-  if (typeof data === 'object' && data !== null) {
-    const decodedObject: any = {};
-    Object.keys(data).forEach(key => {
-      decodedObject[key] = decodeHtmlEntities(data[key]);
-    });
-    return decodedObject;
-  }
-  return data;
-}
 
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
