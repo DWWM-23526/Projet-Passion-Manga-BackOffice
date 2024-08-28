@@ -1,5 +1,6 @@
 import { DataProvider, fetchUtils } from "react-admin";
 import CreateRelationParams from "../interfaces/datProvider/CreateRelationParams";
+import { decodeHtmlEntities } from "../utils/decodeHtmlEntities";
 
 const API_URL = import.meta.env.VITE_SIMPLE_REST_URL;
 
@@ -19,8 +20,10 @@ const dataProvider: DataProvider = {
       `${API_URL}/${resource}?_page=${page}&_limit=${perPage}&_sort=${field}&_order=${order}`,
     );
 
+    const decodedData = decodeHtmlEntities(response.json.data);
+
     return {
-      data: response.json.data,
+      data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
     };
   },
@@ -30,8 +33,10 @@ const dataProvider: DataProvider = {
       `${API_URL}/${resource}/${params.id}`,
     );
 
+    const decodedData = decodeHtmlEntities(response.json.data);
+
     return {
-      data: response.json.data,
+      data: decodedData,
     };
   },
 
@@ -39,8 +44,10 @@ const dataProvider: DataProvider = {
     const response = await fetchUtils.fetchJson(
       `${API_URL}/${resource}?${params.ids}`,
     );
+
+    const decodedData = decodeHtmlEntities(response.json.data);
     return {
-      data: response.json.data,
+      data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
     };
   },
@@ -50,10 +57,10 @@ const dataProvider: DataProvider = {
       `${API_URL}/${resource}/${params.target}/${params.id}`,
     );
 
-    console.log(params.target);
+    const decodedData = decodeHtmlEntities(response.json.data);
 
     return {
-      data: response.json.data,
+      data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
     };
   },
@@ -70,7 +77,9 @@ const dataProvider: DataProvider = {
       user,
     });
 
-    return { data: response.json.data };
+    const decodedData = decodeHtmlEntities(response.json.data);
+
+    return { data: decodedData };
   },
 
   createRelation: async (resource: string, params: CreateRelationParams) => {
@@ -100,7 +109,9 @@ const dataProvider: DataProvider = {
       { ...options, user },
     );
 
-    return { data: response.json.data };
+    const decodedData = decodeHtmlEntities(response.json.data);
+
+    return { data: decodedData };
   },
 
   updateMany: async (resource, params) => {
@@ -115,7 +126,9 @@ const dataProvider: DataProvider = {
       { ...options, user },
     );
 
-    return { data: response.json.data };
+    const decodedData = decodeHtmlEntities(response.json.data);
+
+    return { data: decodedData };
   },
 
   delete: async (resource, params) => {
@@ -129,8 +142,10 @@ const dataProvider: DataProvider = {
       { ...options, user },
     );
 
+    const decodedData = decodeHtmlEntities(response.json.data);
+
     return {
-      data: response.json.data,
+      data: decodedData,
     };
   },
 
@@ -145,8 +160,10 @@ const dataProvider: DataProvider = {
       { ...options, user },
     );
 
+    const decodedData = decodeHtmlEntities(response.json.data);
+
     return {
-      data: response.json.data,
+      data: decodedData,
     };
   },
 };
