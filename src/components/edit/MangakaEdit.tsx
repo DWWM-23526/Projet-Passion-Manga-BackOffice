@@ -2,6 +2,8 @@ import {
   BooleanInput,
   DateInput,
   Edit,
+  ImageField,
+  ImageInput,
   required,
   SimpleForm,
   TextInput,
@@ -10,7 +12,13 @@ import {
 export const MangakaEdit = () => (
   <Edit title="Modification Mangaka">
     <SimpleForm>
-      <TextInput label="Image" source="img_mangaka" validate={required()} />
+      <ImageInput
+        source="img_mangaka"
+        label="Photo du mangaka"
+        validate={required()}
+      >
+        <ImageField source="imageUrl" title="title" />
+      </ImageInput>
       <TextInput label="Prénom" source="first_name" validate={required()} />
       <TextInput label="Nom" source="last_name" validate={required()} />
       <DateInput

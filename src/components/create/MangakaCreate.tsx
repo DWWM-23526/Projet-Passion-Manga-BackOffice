@@ -2,6 +2,9 @@ import {
   BooleanInput,
   Create,
   DateInput,
+  ImageField,
+  ImageInput,
+  required,
   SimpleForm,
   TextInput,
 } from "react-admin";
@@ -9,7 +12,13 @@ import {
 export const MangakaCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="img_mangaka" />
+      <ImageInput
+        source="img_manga"
+        label="Photo du manga"
+        validate={required()}
+      >
+        <ImageField source="imageUrl" title="title" />
+      </ImageInput>
       <TextInput source="first_name" />
       <TextInput source="last_name" />
       <DateInput source="birthdate" />

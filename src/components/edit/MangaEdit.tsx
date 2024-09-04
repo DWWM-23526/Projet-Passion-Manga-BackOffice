@@ -8,6 +8,8 @@ import {
   ReferenceInput,
   SelectInput,
   BooleanInput,
+  ImageInput,
+  ImageField,
 } from "react-admin";
 
 export const MangaEdit = () => (
@@ -18,11 +20,9 @@ export const MangaEdit = () => (
         label="Nom du manga"
         validate={required()}
       />
-      <TextInput
-        source="img_manga"
-        label="Url de l'image du manga"
-        validate={required()}
-      />
+      <ImageInput source="img_manga" label="Photo du manga" validate={required()}>
+        <ImageField source="imageUrl" title="title"/>
+      </ImageInput>
       <TextInput source="edition" label="Edition" validate={required()} />
       <NumberInput
         source="total_tome_number"

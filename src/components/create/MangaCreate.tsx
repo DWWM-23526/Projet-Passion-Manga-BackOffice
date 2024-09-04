@@ -16,6 +16,8 @@ import {
   SaveContextProvider,
   Toolbar,
   SaveButton,
+  ImageInput,
+  ImageField,
 } from "react-admin";
 import Manga from "../../interfaces/Manga";
 
@@ -72,11 +74,13 @@ export const MangaCreate = () => {
             label="Nom du manga"
             validate={required()}
           />
-          <TextInput
+          <ImageInput
             source="img_manga"
-            label="Url de l'image du manga"
+            label="Photo du manga"
             validate={required()}
-          />
+          >
+            <ImageField source="imageUrl" title="title" />
+          </ImageInput>
           <TextInput source="edition" label="Edition" validate={required()} />
           <NumberInput
             source="total_tome_number"
