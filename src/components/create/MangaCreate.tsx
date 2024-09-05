@@ -16,6 +16,8 @@ import {
   SaveContextProvider,
   Toolbar,
   SaveButton,
+  ImageField,
+  ImageInput,
 } from "react-admin";
 import Manga from "../../interfaces/Manga";
 
@@ -26,10 +28,26 @@ export const MangaCreate = () => {
 
   const handleSave = async (values: Manga) => {
     try {
-      const { tags, ...mangaData } = values;
+      const { tags, img_manga, ...mangaData } = values;
+
+      let title = img_manga.rawFile.name.split(".png")[0];
+      title = title.split(".jpg")[0];
+
+      let imgUrl = "";
+
+      if (img_manga && img_manga.rawFile) {
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("images", img_manga.rawFile);
+
+   
+        const url = await dataProvider.uploadImage(formData);
+
+        imgUrl = url[0].url;
+      }
 
       const { data: createdManga } = await dataProvider.create("manga", {
-        data: mangaData,
+        data: { ...mangaData, img_manga: imgUrl },
       });
 
       if (tags && tags.length > 0) {
@@ -72,11 +90,14 @@ export const MangaCreate = () => {
             label="Nom du manga"
             validate={required()}
           />
-          <TextInput
+          <ImageInput
             source="img_manga"
-            label="Url de l'image du manga"
-            validate={required()}
-          />
+            label="image du manga"
+            accept={{ "image/*": [".png", ".jpg"] }}
+          >
+            <ImageField source="src" title="title" />
+          </ImageInput>
+
           <TextInput source="edition" label="Edition" validate={required()} />
           <NumberInput
             source="total_tome_number"
