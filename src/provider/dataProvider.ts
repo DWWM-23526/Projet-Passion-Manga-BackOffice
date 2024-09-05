@@ -3,6 +3,7 @@ import CreateRelationParams from "../interfaces/datProvider/CreateRelationParams
 import { decodeHtmlEntities } from "../utils/decodeHtmlEntities";
 
 const API_URL = import.meta.env.VITE_SIMPLE_REST_URL;
+const API_URL_IMAGES = import.meta.env.VITE_IMAGES_API_URL;
 
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
@@ -22,6 +23,9 @@ const dataProvider: DataProvider = {
 
     const decodedData = decodeHtmlEntities(response.json.data);
 
+ 
+    
+
     return {
       data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
@@ -35,6 +39,8 @@ const dataProvider: DataProvider = {
 
     const decodedData = decodeHtmlEntities(response.json.data);
 
+    console.log(decodedData);
+
     return {
       data: decodedData,
     };
@@ -46,6 +52,9 @@ const dataProvider: DataProvider = {
     );
 
     const decodedData = decodeHtmlEntities(response.json.data);
+
+    console.log(decodedData);
+
     return {
       data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
@@ -63,6 +72,24 @@ const dataProvider: DataProvider = {
       data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
     };
+  },
+
+  uploadImage: async (imageData: FormData) => {
+    const token = localStorage.getItem("authToken");
+    const user = { token: `Bearer ${token}`, authenticated: !!token };
+
+    const options = {
+      method: "POST",
+      body: imageData,
+    };
+
+    const response = await fetchUtils.fetchJson(`${API_URL_IMAGES}`, {
+      ...options,
+      user,
+    });    
+
+
+    return response.json.data;
   },
 
   create: async (resource, params) => {
