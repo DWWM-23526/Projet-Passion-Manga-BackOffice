@@ -23,9 +23,6 @@ const dataProvider: DataProvider = {
 
     const decodedData = decodeHtmlEntities(response.json.data);
 
- 
-    
-
     return {
       data: decodedData,
       total: parseInt(response.headers.get("x-total-count") || "", 10),
@@ -39,8 +36,6 @@ const dataProvider: DataProvider = {
 
     const decodedData = decodeHtmlEntities(response.json.data);
 
-    console.log(decodedData);
-
     return {
       data: decodedData,
     };
@@ -52,8 +47,6 @@ const dataProvider: DataProvider = {
     );
 
     const decodedData = decodeHtmlEntities(response.json.data);
-
-    console.log(decodedData);
 
     return {
       data: decodedData,
@@ -86,8 +79,7 @@ const dataProvider: DataProvider = {
     const response = await fetchUtils.fetchJson(`${API_URL_IMAGES}`, {
       ...options,
       user,
-    });    
-
+    });
 
     return response.json.data;
   },
