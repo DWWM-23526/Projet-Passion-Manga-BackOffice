@@ -1,11 +1,17 @@
-import { BooleanField, Show, SimpleShowLayout, TextField } from "react-admin";
+import {
+  BooleanField,
+  ImageField,
+  Show,
+  SimpleShowLayout,
+  TextField,
+} from "react-admin";
 
 export const TagShow = () => (
   <Show>
     <SimpleShowLayout>
-    <TextField label="Genre" source="tag_name" />
-    <BooleanField label="Supprimé" source="is_deleted" />
+      <TextField label="Genre" source="tag_name" />
+      <ImageField label="Image du Genre" source="img_tag" />
+      <BooleanField label="Supprimé" source="is_deleted" />
     </SimpleShowLayout>
   </Show>
-
 );
