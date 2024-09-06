@@ -1,10 +1,21 @@
-import { BooleanField, ChipField, FunctionField, ReferenceField, ReferenceManyField, Show, SimpleShowLayout, SingleFieldList, TextField } from "react-admin";
+import {
+  BooleanField,
+  ChipField,
+  FunctionField,
+  ImageField,
+  ReferenceField,
+  ReferenceManyField,
+  Show,
+  SimpleShowLayout,
+  SingleFieldList,
+  TextField,
+} from "react-admin";
 
 export const MangaShow = () => (
   <Show>
     <SimpleShowLayout>
-      <TextField label="Titre" source="manga_name"/>
-      <TextField label="Image" source="img_manga"/>
+      <TextField label="Titre" source="manga_name" />
+      <ImageField label="Image du manga" source="img_manga" />
       <ReferenceManyField label="Genres" reference="manga" target="tags">
         <SingleFieldList>
           <ChipField source="tag_name" />
